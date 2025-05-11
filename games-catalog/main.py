@@ -1,6 +1,4 @@
-def main():
-    print("Hello from fastapi-study-2!")
+from create_app import create_app
 
 
-if __name__ == "__main__":
-    main()
+app = create_app()
