@@ -33,7 +33,7 @@ class LoggingConfig(BaseModel):
 
 
 class DBConfig(BaseModel):
-    url: str = f"sqlite+aiosqlite:/// {DB_PATH}"
+    url: str = f"sqlite+aiosqlite:///{DB_PATH}"
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
