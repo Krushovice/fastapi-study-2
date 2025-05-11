@@ -10,7 +10,14 @@
 - 'разработчик' - кто разрабатывал
 """
 
-from sqlalchemy import BigInteger, String, Text
+from datetime import date
+
+from sqlalchemy import (
+    BigInteger,
+    Date,
+    String,
+    Text,
+)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
@@ -31,3 +38,13 @@ class Game(Base):
         default="",
         server_default="",
     )
+    release_date: Mapped[date | None] = mapped_column(
+        Date(),
+        nullable=False,
+    )
+
+    def __str__(self) -> str:
+        return self.title
+
+    def __repr__(self) -> str:
+        return f"Game(id={self.id}, title={self.title!r})"
