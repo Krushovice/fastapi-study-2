@@ -14,6 +14,7 @@ LOG_DEFAULT_FORMAT = (
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+DB_PATH = BASE_DIR / "db.sqlite3"
 
 
 class LoggingConfig(BaseModel):
@@ -32,7 +33,7 @@ class LoggingConfig(BaseModel):
 
 
 class DBConfig(BaseModel):
-    url: str = BASE_DIR / "db.sqlite3"
+    url: str = f"sqlite+aiosqlite:/// {DB_PATH}"
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
