@@ -6,7 +6,7 @@ from app_lifespan import lifespan
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="FastAPI and SQLAlchemy",
+        title="Games Magazine",
         lifespan=lifespan,
         debug=True,
         default_response_class=JSONResponse,
