@@ -11,7 +11,11 @@ from core.models import Game
 
 
 def add_routes(app: FastAPI) -> ApplicationBuilder:
-    builder = ApplicationBuilder(app=app)
+    builder = ApplicationBuilder(
+        app=app,
+        prefix="/api",
+        tags=["api"],
+    )
     builder.add_resource(
         path="/games",
         tags=["Games"],
