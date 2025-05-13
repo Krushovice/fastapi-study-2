@@ -18,13 +18,16 @@ class GameBaseSchema(GameAttributesSchema):
     pass
 
 
+class GameCreateSchema(GameBaseSchema):
+    pass
+
+
+class GameUpdateSchema(GameBaseSchema):
+    title: str | None = None
+    description: str | None = None
+    platform: list[str] | None = None
+    release_date: date | None = None
+
+
 class GameSchema(GameBaseSchema):
     id: int
-
-
-class GameInSchema(GameBaseSchema):
-    pass
-
-
-class GamePatchSchema(GameBaseSchema):
-    pass
