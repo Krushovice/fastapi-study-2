@@ -13,8 +13,9 @@
 from datetime import date
 
 from sqlalchemy import (
-    BigInteger,
     Date,
+    Identity,
+    Integer,
     String,
     Text,
 )
@@ -25,8 +26,10 @@ from .base import Base
 
 class Game(Base):
     id: Mapped[int] = mapped_column(
-        BigInteger(),
+        Integer(),
+        Identity(always=True),
         primary_key=True,
+        autoincrement=True,
     )
     title: Mapped[str] = mapped_column(
         String(120),
