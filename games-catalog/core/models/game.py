@@ -13,6 +13,7 @@
 from datetime import date
 
 from sqlalchemy import (
+    JSON,
     Date,
     Identity,
     Integer,
@@ -40,6 +41,11 @@ class Game(Base):
         nullable=False,
         default="",
         server_default="",
+    )
+    platform: Mapped[list[str]] = mapped_column(
+        JSON,
+        nullable=False,
+        default=lambda: ["PC"],
     )
     release_date: Mapped[date | None] = mapped_column(
         Date(),
