@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from fastapi_jsonapi import ApplicationBuilder
-from schemas.game import (
+
+from api.generic_view import GenericView
+from api.schemas import (
     GameBaseSchema,
     GameCreateSchema,
     GameUpdateSchema,
 )
-
-from api.generic_view import GenericView
 from core.models import Game
 
 
