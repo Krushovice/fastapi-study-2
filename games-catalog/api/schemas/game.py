@@ -10,6 +10,7 @@ class GameAttributesSchema(BaseModel):
     )
     title: str
     description: str
+    platform: list[str]
     release_date: date | None = None
 
 
