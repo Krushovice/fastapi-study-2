@@ -11,7 +11,5 @@ from core.models import db_helper as db
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     builder = add_routes(app)
     builder.initialize()
-    # async with db.engine.begin() as conn:
-    #     await conn.run_sync(Base.metadata.create_all)
     yield
     await db.engine.dispose()

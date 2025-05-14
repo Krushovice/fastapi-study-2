@@ -1,7 +1,12 @@
-from sqlalchemy import Float, Integer
-from sqlalchemy.orm import Mapped, mapped_column
+from typing import TYPE_CHECKING, List
 
-from . import Base
+from sqlalchemy import CheckConstraint, Float, ForeignKey, Integer
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from .base import Base
+
+if TYPE_CHECKING:
+    from .game import Game
 
 
 class MetaGameRating(Base):
@@ -16,4 +21,16 @@ class MetaGameRating(Base):
         nullable=False,
         default=0.0,
         server_default="0.0",
+    )
+
+    game_id: Mapped[int] = mapped_column(
+        ForeignKey("games.id"),
+    )
+
+    games: Mapped[List["Game"]] = relationship(
+        back_populates="rating",
+    )
+
+    __table_args__ = (
+        CheckConstraint("value >= 0 AND value <= 100", name="check_rating_range"),
     )

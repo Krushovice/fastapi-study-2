@@ -11,24 +11,30 @@
 """
 
 from datetime import date
+from typing import TYPE_CHECKING
 
 from sqlalchemy import (
     JSON,
     Date,
-    Identity,
     Integer,
     String,
     Text,
 )
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import (
+    Mapped,
+    mapped_column,
+    relationship,
+)
 
 from .base import Base
+
+if TYPE_CHECKING:
+    from .game_rating import MetaGameRating
 
 
 class Game(Base):
     id: Mapped[int] = mapped_column(
         Integer(),
-        Identity(always=True),
         primary_key=True,
         autoincrement=True,
     )
@@ -54,6 +60,10 @@ class Game(Base):
     release_date: Mapped[date | None] = mapped_column(
         Date(),
         nullable=False,
+    )
+
+    rating: Mapped["MetaGameRating"] = relationship(
+        back_populates="games",
     )
 
     def __str__(self) -> str:
