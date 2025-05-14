@@ -14,7 +14,7 @@ def add_routes(app: FastAPI) -> ApplicationBuilder:
     builder = ApplicationBuilder(
         app=app,
         prefix="/api",
-        tags=["api"],
+        tags=["API"],
     )
     builder.add_resource(
         path="/games",
