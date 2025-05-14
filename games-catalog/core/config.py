@@ -1,8 +1,7 @@
 import logging
-from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, PostgresDsn
 from pydantic_settings import (
     BaseSettings,
     SettingsConfigDict,
@@ -11,10 +10,6 @@ from pydantic_settings import (
 LOG_DEFAULT_FORMAT = (
     "[%(asctime)s.%(msecs)03d] %(module)10s:%(lineno)-3d %(levelname)-7s - %(message)s"
 )
-
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = BASE_DIR / "db.sqlite3"
 
 
 class LoggingConfig(BaseModel):
@@ -32,8 +27,21 @@ class LoggingConfig(BaseModel):
         return logging.getLevelNamesMapping()[self.log_level.upper()]
 
 
+class RunConfig(BaseModel):
+    host: str = "0.0.0.0"
+    port: int = 8000
+
+
+class GunicornConfig(BaseModel):
+    host: str = "0.0.0.0"
+    port: int = 8000
+    workers: int = 1
+    timeout: int = 900
+
+
 class DBConfig(BaseModel):
-    url: str = f"sqlite+aiosqlite:///{DB_PATH}"
+    url: PostgresDsn
+
     echo: bool = False
     echo_pool: bool = False
     pool_size: int = 50
@@ -50,11 +58,18 @@ class DBConfig(BaseModel):
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
+        env_file=".env",
+        env_nested_delimiter="__",
+        env_prefix="APP_CONFIG__",
+        env_file_encoding="utf-8",
         case_sensitive=False,
+        validate_default=False,
     )
 
-    db: DBConfig = DBConfig()
+    db: DBConfig
     logging: LoggingConfig = LoggingConfig()
+    gunicorn: GunicornConfig = GunicornConfig()
+    run: RunConfig = RunConfig()
 
 
 settings = Settings()
