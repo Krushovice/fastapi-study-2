@@ -7,7 +7,12 @@ from api.schemas import (
     GameCreateSchema,
     GameUpdateSchema,
 )
-from core.models import Game
+from api.schemas.game_rating import (
+    GameRatingCreateSchema,
+    GameRatingSchema,
+    GameRatingUpdateSchema,
+)
+from core.models import Game, MetaGameRating
 
 
 def add_routes(app: FastAPI) -> ApplicationBuilder:
@@ -25,5 +30,16 @@ def add_routes(app: FastAPI) -> ApplicationBuilder:
         resource_type="games",
         schema_in_patch=GameUpdateSchema,
         schema_in_post=GameCreateSchema,
+    )
+
+    builder.add_resource(
+        path="/game_ratings",
+        tags=["Game_ratings"],
+        view=GenericView,
+        model=MetaGameRating,
+        schema=GameRatingSchema,
+        resource_type="game_ratings",
+        schema_in_patch=GameRatingUpdateSchema,
+        schema_in_post=GameRatingCreateSchema,
     )
     return builder
