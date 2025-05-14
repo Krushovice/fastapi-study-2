@@ -12,7 +12,7 @@ class GameAttributesSchema(BaseModel):
     model_config = ConfigDict(
         from_attributes=True,
     )
-    title: title_type
+    title: str
     description: str
     platforms: list[str]
     image_url: str
@@ -24,7 +24,7 @@ class GameBaseSchema(GameAttributesSchema):
 
 
 class GameCreateSchema(GameBaseSchema):
-    pass
+    title: title_type
 
 
 class GameUpdateSchema(GameBaseSchema):
