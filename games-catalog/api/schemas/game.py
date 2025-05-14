@@ -10,7 +10,8 @@ class GameAttributesSchema(BaseModel):
     )
     title: str
     description: str
-    platform: list[str]
+    platforms: list[str]
+    image_url: str
     release_date: date | None = None
 
 
@@ -26,6 +27,7 @@ class GameUpdateSchema(GameBaseSchema):
     title: str | None = None
     description: str | None = None
     platform: list[str] | None = None
+    image_url: str | None = None
     release_date: date | None = None
 
 

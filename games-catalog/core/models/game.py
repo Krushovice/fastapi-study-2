@@ -42,7 +42,11 @@ class Game(Base):
         default="",
         server_default="",
     )
-    platform: Mapped[list[str]] = mapped_column(
+    image_url: Mapped[str] = mapped_column(
+        String(),
+        nullable=True,
+    )
+    platforms: Mapped[list[str]] = mapped_column(
         JSON,
         nullable=False,
         default=lambda: ["PC"],
