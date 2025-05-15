@@ -29,6 +29,7 @@ from sqlalchemy.orm import (
 
 from .base import Base
 
+
 if TYPE_CHECKING:
     from .game_rating import MetaGameRating
 

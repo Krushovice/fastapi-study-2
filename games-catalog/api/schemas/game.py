@@ -5,6 +5,7 @@ from annotated_types import MaxLen, MinLen
 from fastapi_jsonapi.schema_base import BaseModel
 from pydantic import ConfigDict
 
+
 title_type = Annotated[str, MinLen(1), MaxLen(120)]
 
 

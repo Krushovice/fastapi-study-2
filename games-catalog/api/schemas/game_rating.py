@@ -5,6 +5,7 @@ from fastapi_jsonapi.schema_base import (
 )
 from pydantic import conint
 
+
 rate_type = Annotated[
     int,
     conint(
