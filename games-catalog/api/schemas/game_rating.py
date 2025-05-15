@@ -16,7 +16,6 @@ rate_type = Annotated[
 
 class GameRatingBaseSchema(BaseModel):
     value: rate_type
-    game_id: int
 
 
 class GameRatingCreateSchema(GameRatingBaseSchema):
@@ -25,7 +24,6 @@ class GameRatingCreateSchema(GameRatingBaseSchema):
 
 class GameRatingUpdateSchema(GameRatingBaseSchema):
     value: rate_type | None = None
-    game_id: int | None = None
 
 
 class GameRatingSchema(GameRatingBaseSchema):
