@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, List
 
-from sqlalchemy import CheckConstraint, ForeignKey, Integer
+from sqlalchemy import CheckConstraint, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -21,10 +21,6 @@ class MetaGameRating(Base):
         nullable=False,
         default=0,
         server_default="0",
-    )
-
-    game_id: Mapped[int] = mapped_column(
-        ForeignKey("games.id"),
     )
 
     games: Mapped[List["Game"]] = relationship(

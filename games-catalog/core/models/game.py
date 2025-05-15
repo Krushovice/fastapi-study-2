@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import (
     JSON,
     Date,
+    ForeignKey,
     Integer,
     String,
     Text,
@@ -61,7 +62,12 @@ class Game(Base):
         Date(),
         nullable=False,
     )
-
+    rating_id: Mapped[int | None] = mapped_column(
+        ForeignKey(
+            "meta_game_ratings.id",
+            ondelete="SET NULL",
+        ),
+    )
     rating: Mapped["MetaGameRating"] = relationship(
         back_populates="games",
     )
