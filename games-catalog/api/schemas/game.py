@@ -1,27 +1,32 @@
 from datetime import date
-from typing import Annotated
+from typing import TYPE_CHECKING, Annotated, Optional
 
 from annotated_types import MaxLen, MinLen
 from fastapi_jsonapi.schema_base import BaseModel
-from pydantic import ConfigDict
+from fastapi_jsonapi.types_metadata import RelationshipInfo
 
+
+if TYPE_CHECKING:
+    from game_rating import GameRatingSchema
 
 title_type = Annotated[str, MinLen(1), MaxLen(120)]
 
 
-class GameAttributesSchema(BaseModel):
-    model_config = ConfigDict(
-        from_attributes=True,
-    )
+class GameBaseSchema(BaseModel):
     title: str
     description: str
     platforms: list[str]
     image_url: str
     release_date: date | None = None
 
-
-class GameBaseSchema(GameAttributesSchema):
-    pass
+    rating: Annotated[
+        Optional["GameRatingSchema"],
+        RelationshipInfo(
+            resource_type="game_rating",
+            id_field_name="id",
+            resource_id_example="1",
+        ),
+    ]
 
 
 class GameCreateSchema(GameBaseSchema):
