@@ -93,6 +93,17 @@ docstring-code-format = false
 docstring-code-line-length = "dynamic"
 
 [lint.isort]
+
+known-first-party = ["games-catalog"]
+
+force-sort-within-sections = true
+
+lines-after-imports = 2
+
 known-third-party = [
     "alembic",
+    "pydantic",
+    "fastapi",
+    "sqlalchemy",
+    "pydantic_settings",
 ]
