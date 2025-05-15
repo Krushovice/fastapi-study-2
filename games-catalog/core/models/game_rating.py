@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING, List
 
-from sqlalchemy import CheckConstraint, Float, ForeignKey, Integer
+from sqlalchemy import CheckConstraint, ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .base import Base
@@ -16,11 +16,11 @@ class MetaGameRating(Base):
         autoincrement=True,
     )
 
-    value: Mapped[float] = mapped_column(
-        Float(),
+    value: Mapped[int] = mapped_column(
+        Integer(),
         nullable=False,
-        default=0.0,
-        server_default="0.0",
+        default=0,
+        server_default="0",
     )
 
     game_id: Mapped[int] = mapped_column(
