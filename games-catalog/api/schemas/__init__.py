@@ -1,7 +1,7 @@
 __all__ = (
     "GameBaseSchema",
     "GameCreateSchema",
-    "GameRatingBase",
+    "GameRatingBaseSchema",
     "GameRatingCreateSchema",
     "GameRatingUpdateSchema",
     "GameUpdateSchema",
@@ -14,7 +14,7 @@ from .game import (
     GameUpdateSchema,
 )
 from .game_rating import (
-    GameRatingBase,
+    GameRatingBaseSchema,
     GameRatingCreateSchema,
     GameRatingUpdateSchema,
 )

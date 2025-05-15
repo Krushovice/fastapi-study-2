@@ -1,8 +1,9 @@
+from typing import Annotated
+
 from fastapi_jsonapi.schema_base import (
     BaseModel,
 )
 from pydantic import conint
-from sqlalchemy.sql.annotation import Annotated
 
 rate_type = Annotated[
     int,
@@ -13,19 +14,19 @@ rate_type = Annotated[
 ]
 
 
-class GameRatingBase(BaseModel):
+class GameRatingBaseSchema(BaseModel):
     value: rate_type
     game_id: int
 
 
-class GameRatingCreateSchema(GameRatingBase):
+class GameRatingCreateSchema(GameRatingBaseSchema):
     pass
 
 
-class GameRatingUpdateSchema(GameRatingBase):
+class GameRatingUpdateSchema(GameRatingBaseSchema):
     value: rate_type | None = None
     game_id: int | None = None
 
 
-class GameRatingSchema(GameRatingBase):
+class GameRatingSchema(GameRatingBaseSchema):
     id: int
