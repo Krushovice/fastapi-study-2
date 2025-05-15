@@ -27,7 +27,7 @@ def add_routes(app: FastAPI) -> ApplicationBuilder:
         view=GenericView,
         model=Game,
         schema=GameBaseSchema,
-        resource_type="games",
+        resource_type="game",
         schema_in_patch=GameUpdateSchema,
         schema_in_post=GameCreateSchema,
     )
@@ -38,7 +38,7 @@ def add_routes(app: FastAPI) -> ApplicationBuilder:
         view=GenericView,
         model=MetaGameRating,
         schema=GameRatingSchema,
-        resource_type="game_ratings",
+        resource_type="game_rating",
         schema_in_patch=GameRatingUpdateSchema,
         schema_in_post=GameRatingCreateSchema,
     )
