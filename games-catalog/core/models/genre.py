@@ -38,7 +38,7 @@ class Genre(Base):
         server_default="",
     )
 
-    games: Mapped[set["Game"]] = relationship(
+    games: Mapped[list["Game"]] = relationship(
         back_populates="genres",
         secondary=GameGenre.__table__,
     )

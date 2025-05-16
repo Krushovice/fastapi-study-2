@@ -74,7 +74,7 @@ class Game(Base):
     rating: Mapped["MetaGameRating"] = relationship(
         back_populates="games",
     )
-    genres: Mapped[set["Genre"]] = relationship(
+    genres: Mapped[list["Genre"]] = relationship(
         back_populates="games",
         secondary=GameGenre.__table__,
     )
