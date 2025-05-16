@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, PrimaryKeyConstraint
+from sqlalchemy import ForeignKey, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import Base
@@ -23,7 +23,7 @@ class GameGenre(IntIdPk, Base):
     )
 
     __table_args__ = (
-        PrimaryKeyConstraint(
+        UniqueConstraint(
             "game_id",
             "genre_id",
         ),
