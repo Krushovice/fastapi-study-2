@@ -28,10 +28,12 @@ from sqlalchemy.orm import (
 )
 
 from .base import Base
+from .game_genre import GameGenre
 
 
 if TYPE_CHECKING:
     from .game_rating import MetaGameRating
+    from .genre import Genre
 
 
 class Game(Base):
@@ -71,6 +73,10 @@ class Game(Base):
     )
     rating: Mapped["MetaGameRating"] = relationship(
         back_populates="games",
+    )
+    genres: Mapped[set["Genre"]] = relationship(
+        back_populates="games",
+        secondary=GameGenre.__table__,
     )
 
     def __str__(self) -> str:

@@ -1,3 +1,5 @@
+from typing import TYPE_CHECKING
+
 from sqlalchemy import (
     Identity,
     Integer,
@@ -7,9 +9,15 @@ from sqlalchemy.dialects.postgresql import CITEXT
 from sqlalchemy.orm import (
     Mapped,
     mapped_column,
+    relationship,
 )
 
 from .base import Base
+from .game_genre import GameGenre
+
+
+if TYPE_CHECKING:
+    from .game import Game
 
 
 class Genre(Base):
@@ -28,6 +36,11 @@ class Genre(Base):
         Text(),
         default="",
         server_default="",
+    )
+
+    games: Mapped[set["Game"]] = relationship(
+        back_populates="genres",
+        secondary=GameGenre.__table__,
     )
 
     def __str__(self):
