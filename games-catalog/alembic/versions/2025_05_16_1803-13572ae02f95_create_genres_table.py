@@ -54,3 +54,4 @@ def upgrade() -> None:
 
 def downgrade() -> None:
     op.drop_table("genres")
+    op.execute("DROP EXTENSION citext;")
