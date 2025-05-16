@@ -44,7 +44,7 @@ class GameCreateSchema(GameBaseSchema):
 class GameUpdateSchema(GameBaseSchema):
     title: title_type | None = None
     description: str | None = None
-    platform: list[str] | None = None
+    platforms: list[str] | None = None
     image_url: str | None = None
     release_date: date | None = None
 
