@@ -8,6 +8,7 @@ from fastapi_jsonapi.types_metadata import RelationshipInfo
 
 if TYPE_CHECKING:
     from game_rating import GameRatingSchema
+    from genre import GenreSchema
 
 title_type = Annotated[str, MinLen(1), MaxLen(120)]
 
@@ -27,6 +28,13 @@ class GameBaseSchema(BaseModel):
             resource_id_example="1",
         ),
     ]
+    genres: Annotated[
+        Optional[list["GenreSchema"]],
+        RelationshipInfo(
+            resource_type="genre",
+            many=True,
+        ),
+    ] = None
 
 
 class GameCreateSchema(GameBaseSchema):
